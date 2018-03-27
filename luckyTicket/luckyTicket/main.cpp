@@ -119,9 +119,24 @@ int main(int argc, const char * argv[]) {
                     ticketNumber[digitCountFirstH] = ticketNumber[digitCountFirstH] + diffBetweenFirstAndSecond;
                 else
                 {
-                    ++ticketNumber[digitCountFirstH - 1];
-                    ticketNumber[digitCountFirstH] = ticketNumber[digitCountFirstH] + diffBetweenFirstAndSecond - 10;
+                    int i = digitCountFirstH;
+                    while (diffBetweenFirstAndSecond != 0)
+                    {
+                        int difference = maxDigit - ticketNumber[i];
+                        if ((diffBetweenFirstAndSecond - difference) >= 0)
+                        {
+                            ticketNumber[i] = ticketNumber[i] + difference;
+                            diffBetweenFirstAndSecond = diffBetweenFirstAndSecond - difference;
+                        }
+                        else
+                        {
+                            ticketNumber[i] = ticketNumber[i] + diffBetweenFirstAndSecond;
+                            break;
+                        }
+                        --i;
+                    }
                 }
+                
             }
         }
         else if (sumOfFirstHalf < sumOfSecondHalf)
@@ -142,15 +157,19 @@ int main(int argc, const char * argv[]) {
         sumOfSecondHalf = sumOfHalf(ticketNumber, secondHalf);
     }
     //number of lucky ticket
+    cout << "  lucky: ";
     for (int i = 0; i < fullTicket; ++i)
         cout << ticketNumber[i];
+    cout << endl << "initial: ";
+    for (int i = 0; i < fullTicket; ++i)
+        cout << initialState[i];
     //quantity of buying tickets
     differenceOfTickets(ticketNumber, initialState, buyAmountTickets);
     
     //output
     cout << endl << endl;
     int counter = 0;
-    while (buyAmountTickets[counter] == 0)
+    while ((buyAmountTickets[counter] == 0) && (counter < fullTicket - 1))
         ++counter;
     for (int i = counter; i < fullTicket; ++i)
     {
