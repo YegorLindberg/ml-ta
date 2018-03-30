@@ -52,7 +52,7 @@ int sumOfHalf(vector<int> ticket, int half)
 
 void differenceOfTickets(vector<int> lucky, vector<int> initial, vector<int>& buyTickets)
 {
-    for (int i = (halfOfTicket * 2); i >= 0; --i)
+    for (int i = (halfOfTicket * 2) - 1; i >= 0; --i)
     {
         if ((lucky[i] - initial[i]) >= 0)
            buyTickets[i] = lucky[i] - initial[i];
@@ -84,7 +84,7 @@ int main(int argc, const char * argv[]) {
     //read in vector:
     inputFile >> halfOfTicket;
     int fullTicket = halfOfTicket * 2;
-    cout << fullTicket << endl;
+    //cout << halfOfTicket << endl;
     vector<int> ticketNumber(fullTicket);
     vector<int> initialState(fullTicket);
     vector<int> buyAmountTickets(fullTicket);
@@ -156,6 +156,7 @@ int main(int argc, const char * argv[]) {
         }
         sumOfSecondHalf = sumOfHalf(ticketNumber, secondHalf);
     }
+    /*
     //number of lucky ticket
     cout << "  lucky: ";
     for (int i = 0; i < fullTicket; ++i)
@@ -163,20 +164,24 @@ int main(int argc, const char * argv[]) {
     cout << endl << "initial: ";
     for (int i = 0; i < fullTicket; ++i)
         cout << initialState[i];
+     */
     //quantity of buying tickets
     differenceOfTickets(ticketNumber, initialState, buyAmountTickets);
     
     //output
-    cout << endl << endl;
+    //cout << endl << endl;
     int counter = 0;
     while ((buyAmountTickets[counter] == 0) && (counter < fullTicket - 1))
         ++counter;
     for (int i = counter; i < fullTicket; ++i)
     {
         outputFile << buyAmountTickets[i];
-        cout << buyAmountTickets[i];
+        //cout << buyAmountTickets[i];
     }
-    cout << endl;
+    //cout << endl;
+    
+    inputFile.close();
+    outputFile.close();
     
     return 0;
 }
