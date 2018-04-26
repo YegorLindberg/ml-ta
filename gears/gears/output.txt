@@ -1,4 +1,3 @@
-clockwise
 unclockwise
 clockwise
 unclockwise
@@ -9998,3 +9997,4 @@ clockwise
 unclockwise
 clockwise
 unclockwise
+clockwise
